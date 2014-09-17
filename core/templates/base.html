@@ -4,12 +4,25 @@
   <head>
 
   </head>
-  <body data-ng-app="jogging">
+  <body data-ng-app="Jogging">
 
+    <div data-ng-view></div>
+
+    {% verbatim %}
+    <script type="text/ng-template" id="timings.html">
+      <ul>
+        <li data-ng-repeat="timing in timings">
+          {{timing.time}}
+        </li>
+      </ul>
+    </script>
+    {% endverbatim %}
 
     <script type="text/javascript" src='{% static 'angular/angular.min.js' %}'></script>
+    <script type="text/javascript" src='{% static 'angular-route/angular-route.min.js' %}'></script>
 
     <script type="text/javascript" src='{% static 'app/main.module.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/timings/timings.module.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/timings/timings.ctrl.js' %}'></script>
   </body>
 </html>

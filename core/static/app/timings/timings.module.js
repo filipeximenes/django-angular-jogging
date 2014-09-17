@@ -1,3 +1,4 @@
-(function(){
-  var app = angular.module('timings', []);
+(function (){
+  var app = angular.module('Jogging.timings',
+                          ['Jogging.timings.ctrl']);
 })();
