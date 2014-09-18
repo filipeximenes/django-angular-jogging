@@ -1,22 +1,10 @@
 (function (){
-  var app = angular.module('Jogging.timings.ctrl',
-                          []);
+  var app = angular.module('Jogging.timings.ctrl', []);
 
   app.controller('TimingsCtrl',
-    ['$scope',
-      function ($scope){
-        $scope.timings = [
-          {
-            date: '',
-            distance: 100,
-            time: 200,
-          },
-          {
-            date: '',
-            distance: 100,
-            time: 200,
-          }
-        ];
+    ['$scope', 'TimingsFactory',
+      function ($scope, TimingsFactory){
+        $scope.timings = TimingsFactory.timings;
       }
     ]);
 })();
