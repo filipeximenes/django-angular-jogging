@@ -29,7 +29,7 @@
                 <input type="text" data-ng-init="updateData.time = timing.time;" data-ng-model="updateData.time">
                 <input type="text" data-ng-init="updateData.distance = timing.distance;" data-ng-model="updateData.distance" >
                 <input type="text" data-ng-init="updateData.date = timing.date;" data-ng-model="updateData.date">
-                <button data-ng-click="status.editing = !status.editing;">save</button>
+                <button data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;">save</button>
                 <button data-ng-click="status.editing = !status.editing;">cancel</button>
               </form>
             </div>

@@ -27,8 +27,7 @@
         };
 
         obj.updateTiming = function (index, data){
-
-
+          obj.timings[index] = data;
         };
 
         obj.deleteTiming = function (index){
