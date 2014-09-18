@@ -23,13 +23,14 @@
         };
 
         obj.createTiming = function (data){
+          obj.timings.push(data);
         };
 
-        obj.updateTiming = function (id){
+        obj.updateTiming = function (index){
 
         };
 
-        obj.deleteTiming = function (id){
+        obj.deleteTiming = function (index){
 
         };
 

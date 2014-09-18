@@ -5,7 +5,6 @@
     ['$scope', 'TimingsFactory',
       function ($scope, TimingsFactory){
         $scope.timingsFactory = TimingsFactory;
-        $scope.formData = {};
       }
     ]);
 })();
