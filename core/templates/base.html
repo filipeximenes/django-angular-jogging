@@ -22,8 +22,8 @@
       </form>
       <ul data-ng-init="timingsFactory.updateTimingList();">
         <li data-ng-repeat="timing in timingsFactory.timings">
-          <div data-ng-init="status = {};" data-ng-switch="status.editing;">
-            <div data-switch-switch-when="false">
+          <div data-ng-init="status = {editing: false};" data-ng-switch="status.editing;">
+            <div data-ng-switch-when="false">
               <button data-ng-click="status.editing = !status.editing">edit</button>
               {{timing.time}} - {{timing.distance}} - {{timing.date}}
             </div>
