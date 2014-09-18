@@ -15,8 +15,8 @@
         <input type="text" data-ng-model="createData.time">
         <input type="text" data-ng-model="createData.distance">
         <input type="text" data-ng-model="createData.date">
+        <button data-ng-click="timingsFactory.createTiming(createData); createData = {};">add</button>
       </form>
-      <button data-ng-click="timingsFactory.createTiming(createData); createData = {};">add</button>
       <ul data-ng-init="timingsFactory.updateTimingList();">
         <li data-ng-repeat="timing in timingsFactory.timings track by $index">
           <div data-ng-init="status = {};" data-ng-switch="status.editing;">
@@ -31,6 +31,7 @@
                 <input type="text" data-ng-init="updateData.date = timing.date;" data-ng-model="updateData.date">
                 <button data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;">save</button>
                 <button data-ng-click="status.editing = !status.editing;">cancel</button>
+                 ---- <button data-ng-click="timingsFactory.deleteTiming($index);status.editing = !status.editing;">delete</button>
               </form>
             </div>
           </div>

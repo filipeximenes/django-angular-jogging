@@ -31,7 +31,7 @@
         };
 
         obj.deleteTiming = function (index){
-
+          obj.timings.splice(index, 1);
         };
 
         return obj;
