@@ -10,12 +10,13 @@
 
     {% verbatim %}
     <script type="text/ng-template" id="timings.html">
+      <button data-ng-click="timingsFactory.updateTimingList()">refresh</button>
       <form>
         <input type="text" data-ng-model="formData.distance">
         <input type="text" data-ng-model="formData.time">
         <input type="text" data-ng-model="formData.date">
       </form>
-      <button data-ng-click="timingsFactory.createTiming(formData); formData = {};">Add</button>
+      <button data-ng-click="timingsFactory.createTiming(formData); formData = {};">add</button>
       <ul data-ng-init="timingsFactory.updateTimingList()">
         <li data-ng-repeat="timing in timingsFactory.timings track by $index">
           {{timing.time}}
