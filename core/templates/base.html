@@ -10,8 +10,8 @@
 
     {% verbatim %}
     <script type="text/ng-template" id="timings.html">
-      <ul>
-        <li data-ng-repeat="timing in timings">
+      <ul data-ng-init="timingsFactory.updateTimingList()">
+        <li data-ng-repeat="timing in timingsFactory.timings track by $index">
           {{timing.time}}
         </li>
       </ul>

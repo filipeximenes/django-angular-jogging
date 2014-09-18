@@ -4,7 +4,8 @@
   app.controller('TimingsCtrl',
     ['$scope', 'TimingsFactory',
       function ($scope, TimingsFactory){
-        $scope.timings = TimingsFactory.timings;
+        $scope.timingsFactory = TimingsFactory;
+        $scope.formData = {};
       }
     ]);
 })();
