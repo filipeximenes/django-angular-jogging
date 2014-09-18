@@ -26,7 +26,8 @@
           obj.timings.push(data);
         };
 
-        obj.updateTiming = function (index){
+        obj.updateTiming = function (index, data){
+
 
         };
 

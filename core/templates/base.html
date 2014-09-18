@@ -12,14 +12,28 @@
     <script type="text/ng-template" id="timings.html">
       <button data-ng-click="timingsFactory.updateTimingList()">refresh</button>
       <form>
-        <input type="text" data-ng-model="formData.distance">
-        <input type="text" data-ng-model="formData.time">
-        <input type="text" data-ng-model="formData.date">
+        <input type="text" data-ng-model="createData.time">
+        <input type="text" data-ng-model="createData.distance">
+        <input type="text" data-ng-model="createData.date">
       </form>
-      <button data-ng-click="timingsFactory.createTiming(formData); formData = {};">add</button>
-      <ul data-ng-init="timingsFactory.updateTimingList()">
+      <button data-ng-click="timingsFactory.createTiming(createData); createData = {};">add</button>
+      <ul data-ng-init="timingsFactory.updateTimingList();">
         <li data-ng-repeat="timing in timingsFactory.timings track by $index">
-          {{timing.time}}
+          <div data-ng-init="status = {};" data-ng-switch="status.editing;">
+            <div data-switch-switch-when="false">
+              <button data-ng-click="status.editing = !status.editing">edit</button>
+              {{timing.time}} - {{timing.distance}} - {{timing.date}}
+            </div>
+            <div data-ng-switch-when="true">
+              <form>
+                <input type="text" data-ng-init="updateData.time = timing.time;" data-ng-model="updateData.time">
+                <input type="text" data-ng-init="updateData.distance = timing.distance;" data-ng-model="updateData.distance" >
+                <input type="text" data-ng-init="updateData.date = timing.date;" data-ng-model="updateData.date">
+                <button data-ng-click="status.editing = !status.editing;">save</button>
+                <button data-ng-click="status.editing = !status.editing;">cancel</button>
+              </form>
+            </div>
+          </div>
         </li>
       </ul>
     </script>
