@@ -9,3 +9,8 @@ from timings.serializers import TimingsSerializer
 class TimingsListCreateEndpoint(generics.ListCreateAPIView):
     model = Timings
     serializer_class = TimingsSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return super(TimingsListCreateEndpoint, self).get_queryset() \
+            .filter(user=user)

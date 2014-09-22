@@ -45,3 +45,14 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertEqual(len(response.data), 2)
+
+    def test_only_returns_auth_user_timings(self):
+        user = self.user
+
+        mommy.make('timings.Timings')
+
+        request = factory.get('')
+        force_authenticate(request, user=user)
+        response = self.view(request)
+
+        self.assertEqual(len(response.data), 0)
