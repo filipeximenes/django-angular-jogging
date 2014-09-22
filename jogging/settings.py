@@ -99,3 +99,10 @@ BOWER_INSTALLED_APPS = (
 )
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, '')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
