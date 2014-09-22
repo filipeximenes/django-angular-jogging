@@ -35,6 +35,12 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_requires_logged_user(self):
+        request = factory.get('')
+        response = self.view(request)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_response_content(self):
         user = self.user
 
