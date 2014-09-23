@@ -77,7 +77,7 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
             'date': '2014-09-21'
         }
 
-    def test_responseStatus(self):
+    def test_response_status(self):
         user = self.user
         params = self.params
 
@@ -86,3 +86,16 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_cannot_create_timing_for_different_user(self):
+        user = self.user
+        params = self.params
+
+        other_user = mommy.make('auth.User')
+        params['user'] = other_user.id
+
+        request = factory.post('', params)
+        force_authenticate(request, user=user)
+        response = self.view(request)
+
+        self.assertEqual(response.data['user'], user.id)
