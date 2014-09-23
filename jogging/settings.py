@@ -94,6 +94,7 @@ STATICFILES_FINDERS = (
 )
 
 BOWER_INSTALLED_APPS = (
+    'moment#2.8.3',
     'angular#1.2.25',
     'restangular#1.4.0',
     'lodash#2.4.1',
