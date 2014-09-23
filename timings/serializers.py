@@ -9,4 +9,4 @@ class TimingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Timings
-        fields = ('time', 'distance', 'date', 'user')
+        fields = ('id', 'time', 'distance', 'date', 'user')

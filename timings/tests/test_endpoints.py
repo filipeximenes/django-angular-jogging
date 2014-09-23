@@ -99,3 +99,13 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertEqual(response.data['user'], user.id)
+
+    def test_returns_created_timing_id(self):
+        user = self.user
+        params = self.params
+
+        request = factory.post('', params)
+        force_authenticate(request, user=user)
+        response = self.view(request)
+
+        self.assertIn('id', response.data)
