@@ -6,11 +6,13 @@ from rest_framework.permissions import IsAuthenticated
 from core.permissions import CustomViewPermission
 from timings.models import Timing
 from timings.serializers import TimingSerializer, TimingUpdateSerializer
+from timings.filters import TimingFilter
 
 
 class TimingsListCreateEndpoint(generics.ListCreateAPIView):
     model = Timing
     serializer_class = TimingSerializer
+    filter_class = TimingFilter
 
     def get_queryset(self):
         user = self.request.user
