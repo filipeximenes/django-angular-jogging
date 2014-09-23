@@ -8,7 +8,7 @@
         $scope.conversionFactory = ConversionFactory;
         $scope.reportsFactory = ReportsFactory;
 
-        $scope.$watch('timingsFactory.timings', function (){
+        $scope.$watchCollection('timingsFactory.timings', function (){
           $scope.reportsFactory.byWeekFiltering($scope.timingsFactory.timings);
         });
       }

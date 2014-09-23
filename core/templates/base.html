@@ -58,13 +58,13 @@
           </td>
         </tr>
         <tr>
-          <td>Total Distance</td>
+          <td>Total Distance (m)</td>
           <td data-ng-repeat="(week, timings) in reportsFactory.report">
             {{reportsFactory.calculateTotalDistance(timings)}}
           </td>
         </tr>
         <tr>
-          <td>Average Speed</td>
+          <td>Average Speed (m/s)</td>
           <td data-ng-repeat="(week, timings) in reportsFactory.report">
             {{reportsFactory.calculateAverageSpeed(timings)|number:2}}
           </td>
