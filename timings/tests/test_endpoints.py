@@ -210,3 +210,34 @@ class UpdateTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request, pk=other_timing.pk)
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class DestroyTimingsEndpointTests(BaseAPITestMixing):
+
+    def setUp(self):
+        super(DestroyTimingsEndpointTests, self).setUp()
+
+        self.view = TimingsRetrieveUpdateDestroyEndpoint.as_view()
+
+        self.timing = mommy.make('timings.Timing', user=self.user)
+
+    def test_response_status(self):
+        user = self.user
+        timing = self.timing
+
+        request = factory.delete('')
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=timing.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_can_only_destroy_self_timings(self):
+        user = self.user
+
+        other_timing = mommy.make('timings.Timing')
+
+        request = factory.delete('')
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=other_timing.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
