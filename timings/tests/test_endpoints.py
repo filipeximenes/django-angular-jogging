@@ -1,10 +1,9 @@
 # coding: utf-8
 
-from django.test import Client
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate
+from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate, APIClient
 from rest_framework import status
 from model_mommy import mommy
 
@@ -23,7 +22,7 @@ class BaseAPITestMixing(APITestCase):
         self.user = User.objects.create_user(
             username, 'test@test.com', password)
 
-        self.auth_client = Client()
+        self.auth_client = APIClient()
         self.auth_client.login(username=username, password=password)
 
 
@@ -93,9 +92,11 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
         }
 
     def test_url(self):
-        response = self.auth_client.get(reverse(self.view_name))
+        params = self.params
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response = self.auth_client.post(reverse(self.view_name), params)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_response_status(self):
         user = self.user
@@ -132,6 +133,7 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
 
 
 class RetrieveTimingsEndpointTests(BaseAPITestMixing):
+    view_name = 'timings-retrive-update-destroy'
 
     def setUp(self):
         super(RetrieveTimingsEndpointTests, self).setUp()
@@ -139,6 +141,13 @@ class RetrieveTimingsEndpointTests(BaseAPITestMixing):
         self.view = TimingsRetrieveUpdateDestroyEndpoint.as_view()
 
         self.timing = mommy.make('timings.Timing', user=self.user)
+
+    def test_url(self):
+        timing = self.timing
+
+        response = self.auth_client.get(reverse(self.view_name, kwargs={'pk': timing.pk}))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_response_status(self):
         user = self.user
@@ -163,6 +172,7 @@ class RetrieveTimingsEndpointTests(BaseAPITestMixing):
 
 
 class UpdateTimingsEndpointTests(BaseAPITestMixing):
+    view_name = 'timings-retrive-update-destroy'
 
     def setUp(self):
         super(UpdateTimingsEndpointTests, self).setUp()
@@ -176,6 +186,14 @@ class UpdateTimingsEndpointTests(BaseAPITestMixing):
             'distance': 10500,
             'date': '2014-09-21'
         }
+
+    def test_url(self):
+        timing = self.timing
+        params = self.params
+
+        response = self.auth_client.put(reverse(self.view_name, kwargs={'pk': timing.pk}), params)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_response_status(self):
         user = self.user
@@ -213,6 +231,7 @@ class UpdateTimingsEndpointTests(BaseAPITestMixing):
 
 
 class DestroyTimingsEndpointTests(BaseAPITestMixing):
+    view_name = 'timings-retrive-update-destroy'
 
     def setUp(self):
         super(DestroyTimingsEndpointTests, self).setUp()
@@ -220,6 +239,13 @@ class DestroyTimingsEndpointTests(BaseAPITestMixing):
         self.view = TimingsRetrieveUpdateDestroyEndpoint.as_view()
 
         self.timing = mommy.make('timings.Timing', user=self.user)
+
+    def test_url(self):
+        timing = self.timing
+
+        response = self.auth_client.delete(reverse(self.view_name, kwargs={'pk': timing.pk}))
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_response_status(self):
         user = self.user
