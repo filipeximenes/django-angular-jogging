@@ -2,28 +2,24 @@
   var app = angular.module('Jogging.timings.service', []);
 
   app.factory('TimingsFactory',
-    [
-      function (){
+    ['Restangular',
+      function (Restangular){
+        var timings = Restangular.all('timings');
+
         obj = {};
         obj.timings = [];
 
         obj.updateTimingList = function (){
-          obj.timings = [
-            {
-              date: '',
-              distance: 100,
-              time: 200,
-            },
-            {
-              date: '',
-              distance: 100,
-              time: 200,
-            }
-          ];
+          return timings.getList().then(function(data) {
+            obj.timings = data;
+            return data;
+          });
         };
 
         obj.createTiming = function (data){
-          obj.timings.push(data);
+          return timings.post(data).then(function (data){
+            obj.timings.push(data);
+          });
         };
 
         obj.updateTiming = function (index, data){

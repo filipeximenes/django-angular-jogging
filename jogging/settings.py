@@ -95,8 +95,9 @@ STATICFILES_FINDERS = (
 
 BOWER_INSTALLED_APPS = (
     'angular#1.2.25',
-    'angular-route#1.2.25',
-)
+    'restangular#1.4.0',
+    'lodash#2.4.1',
+    'angular-route#1.2.25')
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, '')
 

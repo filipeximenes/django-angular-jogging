@@ -1,3 +1,7 @@
+
 from django.contrib import admin
 
-# Register your models here.
+from timings.models import Timing
+
+
+admin.site.register(Timing)
