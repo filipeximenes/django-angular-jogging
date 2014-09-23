@@ -62,3 +62,27 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertEqual(len(response.data), 0)
+
+
+class CreateTimingsEndpointTests(BaseAPITestMixing):
+
+    def setUp(self):
+        super(CreateTimingsEndpointTests, self).setUp()
+
+        self.view = TimingsListCreateEndpoint.as_view()
+
+        self.params = {
+            'time': '1:23:34',
+            'distance': 10500,
+            'date': '2014-09-21'
+        }
+
+    def test_responseStatus(self):
+        user = self.user
+        params = self.params
+
+        request = factory.post('', params)
+        force_authenticate(request, user=user)
+        response = self.view(request)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)

@@ -14,3 +14,7 @@ class TimingsListCreateEndpoint(generics.ListCreateAPIView):
         user = self.request.user
         return super(TimingsListCreateEndpoint, self).get_queryset() \
             .filter(user=user)
+
+    def create(self, request, *args, **kwargs):
+        request.DATA['user'] = self.request.user.id
+        return super(TimingsListCreateEndpoint, self).create(request, *args, **kwargs)
