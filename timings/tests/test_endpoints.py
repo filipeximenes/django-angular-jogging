@@ -160,3 +160,53 @@ class RetrieveTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request, pk=other_timing.pk)
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class UpdateTimingsEndpointTests(BaseAPITestMixing):
+
+    def setUp(self):
+        super(UpdateTimingsEndpointTests, self).setUp()
+
+        self.view = TimingsRetrieveUpdateDestroyEndpoint.as_view()
+
+        self.timing = mommy.make('timings.Timing', user=self.user)
+
+        self.params = {
+            'time': '1:23:34',
+            'distance': 10500,
+            'date': '2014-09-21'
+        }
+
+    def test_response_status(self):
+        user = self.user
+        timing = self.timing
+        params = self.params
+
+        request = factory.put('', params)
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=timing.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_updates_distance(self):
+        user = self.user
+        timing = self.timing
+        params = self.params
+
+        request = factory.put('', params)
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=timing.pk)
+
+        self.assertEqual(response.data['distance'], params['distance'])
+
+    def test_can_only_update_self_timings(self):
+        user = self.user
+        params = self.params
+
+        other_timing = mommy.make('timings.Timing')
+
+        request = factory.put('', params)
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=other_timing.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

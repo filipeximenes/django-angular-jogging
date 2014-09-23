@@ -5,12 +5,12 @@ from rest_framework.permissions import IsAuthenticated
 
 from core.permissions import CustomViewPermission
 from timings.models import Timing
-from timings.serializers import TimingsSerializer
+from timings.serializers import TimingSerializer, TimingUpdateSerializer
 
 
 class TimingsListCreateEndpoint(generics.ListCreateAPIView):
     model = Timing
-    serializer_class = TimingsSerializer
+    serializer_class = TimingSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -24,8 +24,12 @@ class TimingsListCreateEndpoint(generics.ListCreateAPIView):
 
 class TimingsRetrieveUpdateDestroyEndpoint(generics.RetrieveUpdateDestroyAPIView):
     model = Timing
-    serializer_class = TimingsSerializer
+    serializer_class = TimingSerializer
     permission_classes = (IsAuthenticated, CustomViewPermission)
 
     def custom_object_permission(self, request, obj=None):
         return request.user == obj.user
+
+    def update(self, request, *args, **kwargs):
+        self.serializer_class = TimingUpdateSerializer
+        return super(TimingsRetrieveUpdateDestroyEndpoint, self).update(request, *args, **kwargs)
