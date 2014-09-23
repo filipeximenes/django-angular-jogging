@@ -16,4 +16,4 @@ class TimingUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Timing
-        fields = ('time', 'distance', 'date')
+        fields = ('id', 'time', 'distance', 'date')

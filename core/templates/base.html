@@ -32,7 +32,7 @@
                 <label for="time">Time: </label>
                 <input name="time" type="text" data-ng-init="updateData.time = timing.time;" data-ng-model="updateData.time">
                 <label for="distance">Distance: </label>
-                <input name="distance" type="number" data-ng-init="updateData.distance = timing.distance;" data-ng-model="updateData.distance" >
+                <input name="distance" type="text" data-ng-init="updateData.distance = timing.distance;" data-ng-model="updateData.distance" >
                 <label for="date">Date: </label>
                 <input name="date" type="date" data-ng-init="updateData.date = timing.date;" data-ng-model="updateData.date">
                 <button data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;">save</button>

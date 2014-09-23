@@ -19,11 +19,18 @@
         obj.createTiming = function (data){
           return timings.post(data).then(function (data){
             obj.timings.push(data);
+            return data;
           });
         };
 
         obj.updateTiming = function (index, data){
-          obj.timings[index] = data;
+          var timingResource = Restangular.one('timings', obj.timings[index].id);
+          angular.extend(timingResource, data);
+
+          return timingResource.put().then(function (data){
+            angular.extend(obj.timings[index], data);
+            return data;
+          });
         };
 
         obj.deleteTiming = function (index){
