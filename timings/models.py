@@ -7,6 +7,6 @@ from django.conf import settings
 class Timing(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    time = models.TimeField()
-    distance = models.DecimalField(max_digits=5, decimal_places=0)
+    time = models.IntegerField()
+    distance = models.IntegerField()
     date = models.DateField()

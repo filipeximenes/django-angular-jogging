@@ -38,6 +38,7 @@
 
           timingResource.remove().then(function (data){
             obj.timings.splice(index, 1);
+            return data;
           });
         };
 
