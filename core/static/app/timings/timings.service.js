@@ -9,8 +9,8 @@
         obj = {};
         obj.timings = [];
 
-        obj.updateTimingList = function (){
-          return timings.getList().then(function(data) {
+        obj.getTimingList = function (filters){
+          return timings.getList(filters).then(function(data) {
             obj.timings = data;
             return data;
           });
