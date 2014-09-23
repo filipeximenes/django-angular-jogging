@@ -34,7 +34,11 @@
         };
 
         obj.deleteTiming = function (index){
-          obj.timings.splice(index, 1);
+          var timingResource = Restangular.one('timings', obj.timings[index].id);
+
+          timingResource.remove().then(function (data){
+            obj.timings.splice(index, 1);
+          });
         };
 
         return obj;
