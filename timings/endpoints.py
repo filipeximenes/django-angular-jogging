@@ -2,12 +2,12 @@
 
 from rest_framework import generics
 
-from timings.models import Timings
+from timings.models import Timing
 from timings.serializers import TimingsSerializer
 
 
 class TimingsListCreateEndpoint(generics.ListCreateAPIView):
-    model = Timings
+    model = Timing
     serializer_class = TimingsSerializer
 
     def get_queryset(self):
@@ -21,5 +21,5 @@ class TimingsListCreateEndpoint(generics.ListCreateAPIView):
 
 
 class TimingsRetrieveUpdateDestroyEndpoint(generics.RetrieveUpdateDestroyAPIView):
-    model = Timings
+    model = Timing
     serializer_class = TimingsSerializer

@@ -2,11 +2,11 @@
 
 from rest_framework import serializers
 
-from timings.models import Timings
+from timings.models import Timing
 
 
 class TimingsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Timings
+        model = Timing
         fields = ('id', 'time', 'distance', 'date', 'user')

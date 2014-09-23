@@ -58,7 +58,7 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
     def test_response_content(self):
         user = self.user
 
-        mommy.make('timings.Timings', user=user, _quantity=2)
+        mommy.make('timings.Timing', user=user, _quantity=2)
 
         request = factory.get('')
         force_authenticate(request, user=user)
@@ -69,7 +69,7 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
     def test_only_returns_auth_user_timings(self):
         user = self.user
 
-        mommy.make('timings.Timings')
+        mommy.make('timings.Timing')
 
         request = factory.get('')
         force_authenticate(request, user=user)
@@ -138,7 +138,7 @@ class RetrieveTimingsEndpointTests(BaseAPITestMixing):
 
         self.view = TimingsRetrieveUpdateDestroyEndpoint.as_view()
 
-        self.timing = mommy.make('timings.Timings', user=self.user)
+        self.timing = mommy.make('timings.Timing', user=self.user)
 
     def test_response_status(self):
         user = self.user
