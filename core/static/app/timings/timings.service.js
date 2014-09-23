@@ -71,6 +71,20 @@
           return hours + ':' + minutes + ':' + seconds;
         };
 
+        obj.from_formated_to_seconds = function (formated){
+          if (!formated){
+            return 0;
+          }
+
+          var splits = formated.split(':');
+
+          var seconds = parseInt(splits.pop(), 10) || 0;
+          var minutes = parseInt(splits.pop(), 10) || 0;
+          var hours = parseInt(splits.pop(), 10) || 0;
+
+          return (hours * 3600) + (minutes * 60) + seconds;
+        };
+
         return obj;
       }
     ]);

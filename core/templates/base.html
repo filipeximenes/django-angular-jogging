@@ -13,7 +13,7 @@
       <button data-ng-click="timingsFactory.updateTimingList()">refresh</button>
       <form>
         <label for="time">Time: </label>
-        <input name="time" type="text" data-ng-model="createData.time">
+        <input name="time" type="text" data-ng-model="createData.formatedTime" data-ng-change="createData.time = conversionFactory.from_formated_to_seconds(createData.formatedTime)">
         <label for="distance">Distance: </label>
         <input name="distance" type="number" data-ng-model="createData.distance">
         <label for="date">Date: </label>
@@ -30,7 +30,7 @@
             <div data-ng-switch-when="true">
               <form>
                 <label for="time">Time: </label>
-                <input name="time" type="text" data-ng-init="updateData.time = timing.time;" data-ng-model="updateData.time">
+                <input name="formatedTime" type="text" data-ng-init="updateData.formatedTime = conversionFactory.from_seconds_to_formated(timing.time);" data-ng-model="updateData.formatedTime" data-ng-change="updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)">
                 <label for="distance">Distance: </label>
                 <input name="distance" type="text" data-ng-init="updateData.distance = timing.distance;" data-ng-model="updateData.distance" >
                 <label for="date">Date: </label>
