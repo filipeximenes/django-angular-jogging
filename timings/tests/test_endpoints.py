@@ -1,6 +1,8 @@
 # coding: utf-8
 
+from django.test import Client
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate
 from rest_framework import status
@@ -15,16 +17,27 @@ factory = APIRequestFactory()
 class BaseAPITestMixing(APITestCase):
 
     def setUp(self):
+        username = 'test'
+        password = 'testpassword'
         self.user = User.objects.create_user(
-            'test', 'test@test.com', 'testpassword')
+            username, 'test@test.com', password)
+
+        self.auth_client = Client()
+        self.auth_client.login(username=username, password=password)
 
 
 class ListTimingsEndpointTests(BaseAPITestMixing):
+    view_name = 'timings-list-create'
 
     def setUp(self):
         super(ListTimingsEndpointTests, self).setUp()
 
         self.view = TimingsListCreateEndpoint.as_view()
+
+    def test_url(self):
+        response = self.auth_client.get(reverse(self.view_name))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_response_status(self):
         user = self.user
@@ -65,6 +78,7 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
 
 
 class CreateTimingsEndpointTests(BaseAPITestMixing):
+    view_name = 'timings-list-create'
 
     def setUp(self):
         super(CreateTimingsEndpointTests, self).setUp()
@@ -76,6 +90,11 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
             'distance': 10500,
             'date': '2014-09-21'
         }
+
+    def test_url(self):
+        response = self.auth_client.get(reverse(self.view_name))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_response_status(self):
         user = self.user
