@@ -18,3 +18,8 @@ class TimingsListCreateEndpoint(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         request.DATA['user'] = self.request.user.id
         return super(TimingsListCreateEndpoint, self).create(request, *args, **kwargs)
+
+
+class TimingsRetrieveUpdateDestroyEndpoint(generics.RetrieveUpdateDestroyAPIView):
+    model = Timings
+    serializer_class = TimingsSerializer

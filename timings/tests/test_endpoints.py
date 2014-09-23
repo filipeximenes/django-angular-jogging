@@ -8,7 +8,8 @@ from rest_framework.test import APIRequestFactory, APITestCase, force_authentica
 from rest_framework import status
 from model_mommy import mommy
 
-from timings.endpoints import TimingsListCreateEndpoint
+from timings.endpoints import (
+    TimingsListCreateEndpoint, TimingsRetrieveUpdateDestroyEndpoint)
 
 
 factory = APIRequestFactory()
@@ -128,3 +129,22 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertIn('id', response.data)
+
+
+class RetrieveTimingsEndpointTests(BaseAPITestMixing):
+
+    def setUp(self):
+        super(RetrieveTimingsEndpointTests, self).setUp()
+
+        self.view = TimingsRetrieveUpdateDestroyEndpoint.as_view()
+
+        self.timing = mommy.make('timings.Timings', user=self.user)
+
+    def test_response_status(self):
+        user = self.user
+
+        request = factory.get('')
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=user.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
