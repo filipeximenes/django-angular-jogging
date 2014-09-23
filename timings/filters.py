@@ -7,7 +7,7 @@ from timings.models import Timing
 
 class TimingFilter(django_filters.FilterSet):
     start_date = django_filters.DateFilter(name='date', lookup_type='gte')
-    end_date = django_filters.DateFilter(name='date', lookup_type='gte')
+    end_date = django_filters.DateFilter(name='date', lookup_type='lte')
 
     class Meta:
         model = Timing
