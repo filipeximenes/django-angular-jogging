@@ -2,10 +2,15 @@
   var app = angular.module('Jogging.timings.ctrl', []);
 
   app.controller('TimingsCtrl',
-    ['$scope', 'TimingsFactory', 'ConversionFactory',
-      function ($scope, TimingsFactory, ConversionFactory){
+    ['$scope', 'TimingsFactory', 'ConversionFactory', 'ReportsFactory',
+      function ($scope, TimingsFactory, ConversionFactory, ReportsFactory){
         $scope.timingsFactory = TimingsFactory;
         $scope.conversionFactory = ConversionFactory;
+        $scope.reportsFactory = ReportsFactory;
+
+        $scope.$watch('timingsFactory.timings', function (){
+          $scope.reportsFactory.byWeekFiltering($scope.timingsFactory.timings);
+        });
       }
     ]);
 })();

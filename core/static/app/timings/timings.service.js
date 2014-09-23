@@ -4,20 +4,20 @@
   app.factory('TimingsFactory',
     ['Restangular',
       function (Restangular){
-        var timings = Restangular.all('timings');
+        var timingsResource = Restangular.all('timings');
 
         obj = {};
         obj.timings = [];
 
         obj.getTimingList = function (filters){
-          return timings.getList(filters).then(function(data) {
+          return timingsResource.getList(filters).then(function(data) {
             obj.timings = data;
             return data;
           });
         };
 
         obj.createTiming = function (data){
-          return timings.post(data).then(function (data){
+          return timingsResource.post(data).then(function (data){
             obj.timings.push(data);
             return data;
           });
@@ -83,6 +83,49 @@
           var hours = parseInt(splits.pop(), 10) || 0;
 
           return (hours * 3600) + (minutes * 60) + seconds;
+        };
+
+        return obj;
+      }
+    ]);
+
+  app.factory('ReportsFactory',
+    [
+      function (){
+        var obj = {};
+
+        obj.report = {};
+
+        obj.byWeekFiltering = function (timings){
+          obj.report = {};
+          angular.forEach(timings, function (timing){
+            var date = moment(timing.date);
+            if (!obj.report[date.weeks()]){
+              obj.report[date.weeks()] = [];
+            }
+
+            obj.report[date.weeks()].push(timing);
+          });
+
+          return obj.report;
+        };
+
+        obj.calculateTotalDistance = function (timings){
+          var total = 0;
+          angular.forEach(timings, function (timing){
+            total += timing.distance;
+          });
+          return total;
+        };
+
+        obj.calculateAverageSpeed = function (timings){
+          var totalDistance = 0;
+          var totalTime = 0;
+          angular.forEach(timings, function (timing){
+            totalDistance += timing.distance;
+            totalTime += timing.time;
+          });
+          return totalDistance / totalTime;
         };
 
         return obj;

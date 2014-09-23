@@ -24,9 +24,9 @@
         <input type="date" name="startDate" data-ng-model="filters.start_date">
         <label for="endDate">to</label>
         <input type="date" name="endDate" data-ng-model="filters.end_date">
-        <button data-ng-click="timingsFactory.getTimingList(filters)">filter</button>
+        <button data-ng-click="timingsFactory.getTimingList(filters);">filter</button>
       </form>
-      <ul data-ng-init="timingsFactory.updateTimingList();">
+      <ul data-ng-init="timingsFactory.getTimingList();">
         <li data-ng-repeat="timing in timingsFactory.timings">
           <div data-ng-init="status = {editing: false};" data-ng-switch="status.editing;">
             <div data-ng-switch-when="false">
@@ -49,6 +49,28 @@
           </div>
         </li>
       </ul>
+
+      <table>
+        <tr>
+          <td>Week Number</td>
+          <td data-ng-repeat="(week, timings) in reportsFactory.report">
+            {{week}}
+          </td>
+        </tr>
+        <tr>
+          <td>Total Distance</td>
+          <td data-ng-repeat="(week, timings) in reportsFactory.report">
+            {{reportsFactory.calculateTotalDistance(timings)}}
+          </td>
+        </tr>
+        <tr>
+          <td>Average Speed</td>
+          <td data-ng-repeat="(week, timings) in reportsFactory.report">
+            {{reportsFactory.calculateAverageSpeed(timings)|number:2}}
+          </td>
+        </tr>
+      </table>
+
     </script>
     {% endverbatim %}
 
@@ -56,6 +78,7 @@
     <script type="text/javascript" src='{% static 'angular-route/angular-route.min.js' %}'></script>
     <script type="text/javascript" src='{% static 'lodash/dist/lodash.min.js' %}'></script>
     <script type="text/javascript" src='{% static 'restangular/dist/restangular.min.js' %}'></script>
+    <script type="text/javascript" src='{% static 'moment/min/moment-with-locales.min.js' %}'></script>
 
     <script type="text/javascript" src='{% static 'app/main.module.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/timings/timings.module.js' %}'></script>
