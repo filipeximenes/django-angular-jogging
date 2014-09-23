@@ -25,7 +25,7 @@
           <div data-ng-init="status = {editing: false};" data-ng-switch="status.editing;">
             <div data-ng-switch-when="false">
               <button data-ng-click="status.editing = !status.editing">edit</button>
-              {{timing.time}} - {{timing.distance}} - {{timing.date}}
+              {{conversionFactory.from_seconds_to_formated(timing.time)}} - {{timing.distance}} - {{timing.date}}
             </div>
             <div data-ng-switch-when="true">
               <form>

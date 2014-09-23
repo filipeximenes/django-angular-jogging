@@ -45,4 +45,33 @@
         return obj;
       }
     ]);
+
+  app.factory('ConversionFactory',
+    [
+      function (){
+        var obj = {};
+
+        obj.from_seconds_to_formated = function (total_secs){
+          var hours = '' + Math.floor(total_secs / 3600);
+          var minutes = '' + Math.floor((total_secs % 3600) / 60);
+          var seconds = '' + ((total_secs % 3600) % 60);
+
+          if (hours.length === 1){
+            hours = '0' + hours;
+          }
+
+          if (minutes.length === 1){
+            minutes = '0' + minutes;
+          }
+
+          if (seconds.length === 1){
+            seconds = '0' + seconds;
+          }
+
+          return hours + ':' + minutes + ':' + seconds;
+        };
+
+        return obj;
+      }
+    ]);
 })();
