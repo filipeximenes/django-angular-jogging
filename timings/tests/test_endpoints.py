@@ -142,9 +142,21 @@ class RetrieveTimingsEndpointTests(BaseAPITestMixing):
 
     def test_response_status(self):
         user = self.user
+        timing = self.timing
 
         request = factory.get('')
         force_authenticate(request, user=user)
-        response = self.view(request, pk=user.pk)
+        response = self.view(request, pk=timing.pk)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_can_only_retrieve_self_timings(self):
+        user = self.user
+
+        other_timing = mommy.make('timings.Timing')
+
+        request = factory.get('')
+        force_authenticate(request, user=user)
+        response = self.view(request, pk=other_timing.pk)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

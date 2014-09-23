@@ -1,7 +1,9 @@
 # coding: utf-8
 
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
+from core.permissions import CustomViewPermission
 from timings.models import Timing
 from timings.serializers import TimingsSerializer
 
@@ -23,3 +25,7 @@ class TimingsListCreateEndpoint(generics.ListCreateAPIView):
 class TimingsRetrieveUpdateDestroyEndpoint(generics.RetrieveUpdateDestroyAPIView):
     model = Timing
     serializer_class = TimingsSerializer
+    permission_classes = (IsAuthenticated, CustomViewPermission)
+
+    def custom_object_permission(self, request, obj=None):
+        return request.user == obj.user
