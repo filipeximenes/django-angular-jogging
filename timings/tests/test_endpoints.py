@@ -1,29 +1,17 @@
 # coding: utf-8
 
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate, APIClient
+from rest_framework.test import APIRequestFactory, force_authenticate
 from rest_framework import status
 from model_mommy import mommy
 
+from core.test.utils import BaseAPITestMixing
 from timings.endpoints import (
     TimingsListCreateEndpoint, TimingsRetrieveUpdateDestroyEndpoint)
 
 
 factory = APIRequestFactory()
-
-
-class BaseAPITestMixing(APITestCase):
-
-    def setUp(self):
-        username = 'test'
-        password = 'testpassword'
-        self.user = User.objects.create_user(
-            username, 'test@test.com', password)
-
-        self.auth_client = APIClient()
-        self.auth_client.login(username=username, password=password)
 
 
 class ListTimingsEndpointTests(BaseAPITestMixing):
@@ -52,7 +40,7 @@ class ListTimingsEndpointTests(BaseAPITestMixing):
         request = factory.get('')
         response = self.view(request)
 
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_response_content(self):
         user = self.user
