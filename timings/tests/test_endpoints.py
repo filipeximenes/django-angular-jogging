@@ -86,7 +86,7 @@ class CreateTimingsEndpointTests(BaseAPITestMixing):
         self.view = TimingsListCreateEndpoint.as_view()
 
         self.params = {
-            'time': '1:23:34',
+            'time': 5014,
             'distance': 10500,
             'date': '2014-09-21'
         }
@@ -182,7 +182,7 @@ class UpdateTimingsEndpointTests(BaseAPITestMixing):
         self.timing = mommy.make('timings.Timing', user=self.user)
 
         self.params = {
-            'time': '1:23:34',
+            'time': 5014,
             'distance': 10500,
             'date': '2014-09-21'
         }
