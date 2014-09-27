@@ -12,38 +12,72 @@
     <script type="text/ng-template" id="timings.html">
       <form>
         <label for="time">Time: </label>
-        <input name="time" type="text" data-ng-model="createData.formatedTime" data-ng-change="createData.time = conversionFactory.from_formated_to_seconds(createData.formatedTime)">
+        <input
+          data-ng-model="createData.formatedTime"
+          data-ng-change="createData.time = conversionFactory.from_formated_to_seconds(createData.formatedTime)"
+          name="time" type="text">
         <label for="distance">Distance: </label>
-        <input name="distance" type="number" data-ng-model="createData.distance">
+        <input
+          data-ng-model="createData.distance"
+          name="distance" type="number" >
         <label for="date">Date: </label>
-        <input name="date" type="date" data-ng-model="createData.date">
-        <button data-ng-click="timingsFactory.createTiming(createData); createData = {};">add</button>
+        <input
+          data-ng-model="createData.date"
+          name="date" type="date">
+        <button
+          data-ng-click="timingsFactory.createTiming(createData); createData = {};">add</button>
       </form>
       <form>
         <label for="startDate">from</label>
-        <input type="date" name="startDate" data-ng-model="filters.start_date">
+        <input
+          data-ng-model="filters.start_date"
+          type="date" name="startDate">
         <label for="endDate">to</label>
-        <input type="date" name="endDate" data-ng-model="filters.end_date">
-        <button data-ng-click="timingsFactory.getTimingList(filters);">filter</button>
+        <input
+          data-ng-model="filters.end_date"
+          type="date" name="endDate">
+        <button
+          data-ng-click="timingsFactory.getTimingList(filters);">filter</button>
       </form>
-      <ul data-ng-init="timingsFactory.getTimingList();">
-        <li data-ng-repeat="timing in timingsFactory.timings">
-          <div data-ng-init="status = {editing: false};" data-ng-switch="status.editing;">
-            <div data-ng-switch-when="false">
-              <button data-ng-click="status.editing = !status.editing">edit</button>
+      <ul
+        data-ng-init="timingsFactory.getTimingList();">
+        <li
+          data-ng-repeat="timing in timingsFactory.timings">
+          <div
+            data-ng-init="status = {editing: false};"
+            data-ng-switch="status.editing;">
+            <div
+              data-ng-switch-when="false">
+              <button
+                data-ng-click="status.editing = !status.editing">edit</button>
               {{conversionFactory.from_seconds_to_formated(timing.time)}} - {{timing.distance}} - {{timing.date}} - {{timing.distance/timing.time|number:2}} m/s
             </div>
-            <div data-ng-switch-when="true">
+            <div
+              data-ng-switch-when="true">
               <form>
                 <label for="time">Time: </label>
-                <input name="formatedTime" type="text" data-ng-init="updateData.formatedTime = conversionFactory.from_seconds_to_formated(timing.time); updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)" data-ng-model="updateData.formatedTime" data-ng-change="updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)">
+                <input
+                  data-ng-model="updateData.formatedTime"
+                  data-ng-init="updateData.formatedTime = conversionFactory.from_seconds_to_formated(timing.time); updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)"
+                  data-ng-change="updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)"
+                  name="formatedTime" type="text">
                 <label for="distance">Distance: </label>
-                <input name="distance" type="text" data-ng-init="updateData.distance = timing.distance;" data-ng-model="updateData.distance" >
+                <input
+                  data-ng-model="updateData.distance"
+                  data-ng-init="updateData.distance = timing.distance;"
+                  name="distance" type="text">
                 <label for="date">Date: </label>
-                <input name="date" type="date" data-ng-init="updateData.date = timing.date;" data-ng-model="updateData.date">
-                <button data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;">save</button>
-                <button data-ng-click="status.editing = !status.editing;">cancel</button>
-                 ---- <button data-ng-click="timingsFactory.deleteTiming($index);">delete</button>
+                <input
+                  data-ng-model="updateData.date"
+                  data-ng-init="updateData.date = timing.date;"
+                  name="date" type="date">
+                <button
+                  data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;">save</button>
+                <button
+                  data-ng-click="status.editing = !status.editing;">cancel</button>
+                 ----
+                <button
+                  data-ng-click="timingsFactory.deleteTiming($index);">delete</button>
               </form>
             </div>
           </div>
@@ -53,19 +87,22 @@
       <table>
         <tr>
           <td>Week Number</td>
-          <td data-ng-repeat="(week, timings) in reportsFactory.report">
+          <td
+            data-ng-repeat="(week, timings) in reportsFactory.report">
             {{week}}
           </td>
         </tr>
         <tr>
           <td>Total Distance (m)</td>
-          <td data-ng-repeat="(week, timings) in reportsFactory.report">
+          <td
+            data-ng-repeat="(week, timings) in reportsFactory.report">
             {{reportsFactory.calculateTotalDistance(timings)}}
           </td>
         </tr>
         <tr>
           <td>Average Speed (m/s)</td>
-          <td data-ng-repeat="(week, timings) in reportsFactory.report">
+          <td
+            data-ng-repeat="(week, timings) in reportsFactory.report">
             {{reportsFactory.calculateAverageSpeed(timings)|number:2}}
           </td>
         </tr>
