@@ -3,6 +3,12 @@
 <html>
   <head>
 
+    <style type="text/css">
+      .ng-invalid {
+        border-color: red;
+      }
+    </style>
+
   </head>
   <body data-ng-app="Jogging">
 
@@ -11,16 +17,19 @@
     {% verbatim %}
     <script type="text/ng-template" id="index.html">
       <h1>The Great Jog Timing App</h1>
-      <form>
+      <form name="signupForm">
         <h2>Create new account</h2>
+        <span
+          data-ng-if="accountCreationResponse.status === 201">Successfully Created Account</span><br>
         <label for="username">Username: </label>
         <input
           data-ng-model="newAccount.username"
+          data-ng-class="{signupForm.username.$error: form-invalid}"
           type="text" name="username">
         <label for="email">Email: </label>
         <input
           data-ng-model="newAccount.email"
-          type="text" name="email">
+          type="email" name="email">
         <label for="password">Password: </label>
         <input
           data-ng-model="newAccount.password"

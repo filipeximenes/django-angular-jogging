@@ -30,6 +30,7 @@
 
         RestangularProvider.setBaseUrl('/api');
         RestangularProvider.setRequestSuffix('/');
+        RestangularProvider.setFullResponse(true);
       }
     ]);
 })();
