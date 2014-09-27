@@ -10,3 +10,6 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+    def transform_password(self, obj, value):
+        return ''

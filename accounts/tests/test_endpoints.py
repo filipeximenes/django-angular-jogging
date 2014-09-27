@@ -38,3 +38,14 @@ class AccountCreateEnpointTests(BaseAPITestMixing):
         user = User.objects.get(username=params['username'])
 
         self.assertTrue(user.check_password(params['password']))
+        self.assertEqual(response.data['password'], '')
+
+    def test_does_not_create_user_if_password_is_not_set(self):
+        params = self.params
+
+        params['password'] = ''
+
+        request = self.factory.post('', params)
+        response = self.view(request)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

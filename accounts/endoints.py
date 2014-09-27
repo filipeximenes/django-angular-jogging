@@ -13,7 +13,7 @@ class AccountCreateEnpoint(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         response = super(AccountCreateEnpoint, self).create(request, *args, **kwargs)
 
-        if self.object:
+        if hasattr(self, 'object'):
             self.object.set_password(request.DATA['password'])
             self.object.save()
 
