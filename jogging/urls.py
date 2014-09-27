@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^$', include('core.urls')),
 
     url(r'^api/', include('timings.endpoints_urls')),
+    url(r'^api/', include('accounts.endpoints_urls')),
 )

@@ -1,11 +1,12 @@
 # coding: utf-8
 
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from rest_framework import status
 
 from core.test.utils import BaseAPITestMixing
-from accounts.endoints import AccountCreateEnpoint
+from accounts.endpoints import AccountCreateEnpoint
 
 
 class AccountCreateEnpointTests(BaseAPITestMixing):
@@ -20,6 +21,13 @@ class AccountCreateEnpointTests(BaseAPITestMixing):
             'username': 'username',
             'password': 'password',
         }
+
+    def test_url(self):
+        params = self.params
+
+        response = self.auth_client.post(reverse('accounts-create'), params)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_response_status(self):
         params = self.params
