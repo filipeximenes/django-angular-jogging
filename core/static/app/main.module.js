@@ -12,7 +12,7 @@
         $routeProvider.
           when('/', {
             templateUrl: 'index.html',
-            controller: 'TimingsCtrl'
+            controller: 'AccountController'
           }).
           when('/timings', {
             templateUrl: 'timings.html',

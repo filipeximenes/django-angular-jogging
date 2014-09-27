@@ -15,18 +15,18 @@
         <h2>Create new account</h2>
         <label for="username">Username: </label>
         <input
-          data-ng-model="createAccount.username"
+          data-ng-model="newAccount.username"
           type="text" name="username">
         <label for="email">Email: </label>
         <input
-          data-ng-model="createAccount.email"
+          data-ng-model="newAccount.email"
           type="text" name="email">
         <label for="password">Password: </label>
         <input
-          data-ng-model="createAccount.password"
+          data-ng-model="newAccount.password"
           type="text" name="password">
         <button
-          data-ng-click="">Create</button>
+          data-ng-click="accountFactory.createAccount(newAccount);">Create</button>
       </form>
       <form>
 
