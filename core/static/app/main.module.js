@@ -3,13 +3,18 @@
                           ['ngRoute',
                            'restangular',
 
-                          'Jogging.timings',]);
+                          'Jogging.accounts',
+                          'Jogging.timings']);
 
   app.config(
     ['$routeProvider',
       function ($routeProvider){
         $routeProvider.
           when('/', {
+            templateUrl: 'index.html',
+            controller: 'TimingsCtrl'
+          }).
+          when('/timings', {
             templateUrl: 'timings.html',
             controller: 'TimingsCtrl'
           });

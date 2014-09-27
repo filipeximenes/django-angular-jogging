@@ -9,6 +9,30 @@
     <div data-ng-view></div>
 
     {% verbatim %}
+    <script type="text/ng-template" id="index.html">
+      <h1>The Great Jog Timing App</h1>
+      <form>
+        <h2>Create new account</h2>
+        <label for="username">Username: </label>
+        <input
+          data-ng-model="createAccount.username"
+          type="text" name="username">
+        <label for="email">Email: </label>
+        <input
+          data-ng-model="createAccount.email"
+          type="text" name="email">
+        <label for="password">Password: </label>
+        <input
+          data-ng-model="createAccount.password"
+          type="text" name="password">
+        <button
+          data-ng-click="">Create</button>
+      </form>
+      <form>
+
+      </form>
+    </script>
+
     <script type="text/ng-template" id="timings.html">
       <form>
         <label for="time">Time: </label>
@@ -118,6 +142,9 @@
     <script type="text/javascript" src='{% static 'moment/min/moment-with-locales.min.js' %}'></script>
 
     <script type="text/javascript" src='{% static 'app/main.module.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/accounts/accounts.module.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/accounts/accounts.ctrl.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/accounts/accounts.service.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/timings/timings.module.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/timings/timings.ctrl.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/timings/timings.service.js' %}'></script>
