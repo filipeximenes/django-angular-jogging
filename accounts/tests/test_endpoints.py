@@ -69,6 +69,7 @@ class AccountCreateEnpointTests(BaseAPITestMixing):
 
 
 class LoginEndpointTests(BaseAPITestMixing):
+    view_name = 'login'
 
     def setUp(self):
         super(LoginEndpointTests, self).setUp()
@@ -80,6 +81,13 @@ class LoginEndpointTests(BaseAPITestMixing):
             'password': self.password,
         }
 
+    def test_url(self):
+        params = self.params
+
+        response = self.auth_client.post(reverse(self.view_name), params)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_response_status(self):
         params = self.params
 
@@ -87,6 +95,14 @@ class LoginEndpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_returns_token(self):
+        params = self.params
+
+        request = self.factory.post('', params)
+        response = self.view(request)
+
+        self.assertNotEqual(response.data['token'], '')
 
     def test_test_returns_404_if_username_does_not_exists(self):
         params = self.params

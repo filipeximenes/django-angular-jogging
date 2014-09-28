@@ -37,6 +37,6 @@ class LoginEndpoint(APIView):
         if not user.check_password(password):
             return Response({}, status.HTTP_400_BAD_REQUEST)
 
-        token = Token.objects.get_or_create(user=user)
+        token, _ = Token.objects.get_or_create(user=user)
 
-        return Response({'token': token}, status.HTTP_200_OK)
+        return Response({'token': token.key}, status.HTTP_200_OK)
