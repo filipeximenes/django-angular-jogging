@@ -13,11 +13,11 @@
         $routeProvider.
           when('/', {
             templateUrl: 'login.html',
-            controller: 'AccountController'
+            controller: 'LoginController'
           }).
           when('/signup', {
             templateUrl: 'signup.html',
-            controller: 'AccountController'
+            controller: 'AccountCreateController'
           }).
           when('/timings', {
             templateUrl: 'timings.html',
@@ -40,9 +40,13 @@
   ]);
 
   app.run(
-    ['$cookies', 'Restangular',
-      function ($cookies, Restangular){
-        Restangular.setDefaultHeaders({Authorization: 'Token ' + $cookies.auth_token});
+    ['$cookies', '$location', 'Restangular',
+      function ($cookies, $location, Restangular){
+        if ($cookies.auth_token){
+          Restangular.setDefaultHeaders({Authorization: 'Token ' + $cookies.auth_token});
+        }else{
+          $location.path('/');
+        }
       }
   ]);
 

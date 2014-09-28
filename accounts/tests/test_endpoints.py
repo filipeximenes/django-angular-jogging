@@ -26,7 +26,7 @@ class AccountCreateEnpointTests(BaseAPITestMixing):
     def test_url(self):
         params = self.params
 
-        response = self.auth_client.post(reverse(self.view_name), params)
+        response = self.client.post(reverse(self.view_name), params)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -84,7 +84,7 @@ class LoginEndpointTests(BaseAPITestMixing):
     def test_url(self):
         params = self.params
 
-        response = self.auth_client.post(reverse(self.view_name), params)
+        response = self.client.post(reverse(self.view_name), params)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

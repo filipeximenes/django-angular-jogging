@@ -21,6 +21,20 @@
               });
           };
 
+          this.performLogin = function (data){
+            Restangular.all('login').post(data)
+              .then(function (response){
+                _this.setCredentials(response.data.token);
+                if (callbacks.performLoginCallback){
+                  return callbacks.performLoginCallback(response);
+                }
+              }, function (response){
+                if (callbacks.performLoginCallback){
+                  return callbacks.performLoginCallback(response);
+                }
+              });
+          };
+
           this.setCredentials = function (token){
             Restangular.setDefaultHeaders({Authorization: 'Token ' + token});
             $cookies.auth_token = token;

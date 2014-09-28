@@ -15,6 +15,27 @@
     <div data-ng-view></div>
 
     {% verbatim %}
+    <script type="text/ng-template" id="login.html">
+      <h1>The Great Jog Timing App</h1>
+      <form>
+        <h1>Login</h1>
+        <span
+          data-ng-if="loginFailure">Invalid login data</span><br>
+        <label for="username">Username: </label>
+        <input
+          data-ng-model="loginData.username"
+          type="text" name="username">
+        <label for="password">Password: </label>
+        <input
+          data-ng-model="loginData.password"
+          type="password" name="password">
+        <button
+          data-ng-click="accountFactory.performLogin(loginData);">Login</button>
+      </form>
+      <a
+        data-ng-href="#/signup">Create account</a>
+    </script>
+
     <script type="text/ng-template" id="signup.html">
       <h1>The Great Jog Timing App</h1>
       <form name="signupForm">
@@ -31,7 +52,7 @@
         <label for="password">Password: </label>
         <input
           data-ng-model="newAccount.password"
-          type="text" name="password">
+          type="password" name="password">
         <button
           data-ng-click="accountFactory.createAccount(newAccount);">Create</button>
       </form>
