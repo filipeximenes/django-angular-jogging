@@ -1,10 +1,11 @@
 (function (){
-  var app = angular.module('Jogging',
-                          ['ngRoute',
-                           'restangular',
+  var app = angular.module('Jogging', [
+                            'ngRoute',
+                            'ngCookies',
+                            'restangular',
 
-                          'Jogging.accounts',
-                          'Jogging.timings']);
+                            'Jogging.accounts',
+                            'Jogging.timings']);
 
   app.config(
     ['$routeProvider',
@@ -36,5 +37,13 @@
         RestangularProvider.setRequestSuffix('/');
         RestangularProvider.setFullResponse(true);
       }
-    ]);
+  ]);
+
+  app.run(
+    ['$cookies', 'Restangular',
+      function ($cookies, Restangular){
+        Restangular.setDefaultHeaders({Authorization: 'Token ' + $cookies.auth_token});
+      }
+  ]);
+
 })();

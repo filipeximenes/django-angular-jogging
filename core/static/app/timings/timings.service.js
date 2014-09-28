@@ -10,16 +10,14 @@
         obj.timings = [];
 
         obj.getTimingList = function (filters){
-          return timingsResource.getList(filters).then(function(data) {
-            obj.timings = data;
-            return data;
+          return timingsResource.getList(filters).then(function(response) {
+            obj.timings = response.data;
           });
         };
 
         obj.createTiming = function (data){
-          return timingsResource.post(data).then(function (data){
-            obj.timings.push(data);
-            return data;
+          return timingsResource.post(data).then(function (response){
+            obj.timings.push(response.data);
           });
         };
 
@@ -27,18 +25,16 @@
           var timingResource = Restangular.one('timings', obj.timings[index].id);
           angular.extend(timingResource, data);
 
-          return timingResource.put().then(function (data){
-            angular.extend(obj.timings[index], data);
-            return data;
+          return timingResource.put().then(function (response){
+            angular.extend(obj.timings[index], response.data);
           });
         };
 
         obj.deleteTiming = function (index){
           var timingResource = Restangular.one('timings', obj.timings[index].id);
 
-          timingResource.remove().then(function (data){
+          timingResource.remove().then(function (response){
             obj.timings.splice(index, 1);
-            return data;
           });
         };
 
