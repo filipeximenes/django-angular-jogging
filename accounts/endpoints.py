@@ -11,13 +11,9 @@ class AccountCreateEnpoint(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = AccountSerializer
 
-    def create(self, request, *args, **kwargs):
-        response = super(AccountCreateEnpoint, self).create(request, *args, **kwargs)
+    def pre_save(self, obj):
+        obj.set_password(self.request.DATA['password'])
 
-        if hasattr(self, 'object'):
-            self.object.set_password(request.DATA['password'])
-            self.object.save()
-            Token.objects.get_or_create(user=self.object)
-
-        return response
-
+    def post_save(self, obj, created=False):
+        if created:
+            Token.objects.get_or_create(user=obj)

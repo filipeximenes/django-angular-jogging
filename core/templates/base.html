@@ -15,12 +15,10 @@
     <div data-ng-view></div>
 
     {% verbatim %}
-    <script type="text/ng-template" id="index.html">
+    <script type="text/ng-template" id="signup.html">
       <h1>The Great Jog Timing App</h1>
       <form name="signupForm">
         <h2>Create new account</h2>
-        <span
-          data-ng-if="accountCreationResponse.status === 201">Successfully Created Account</span><br>
         <label for="username">Username: </label>
         <input
           data-ng-model="newAccount.username"
@@ -36,9 +34,6 @@
           type="text" name="password">
         <button
           data-ng-click="accountFactory.createAccount(newAccount);">Create</button>
-      </form>
-      <form>
-
       </form>
     </script>
 

@@ -7,13 +7,14 @@
         var Factory = function(callbacks){
           this.createAccount = function (data){
             return Restangular.all('accounts').post(data)
-              .then(function (data){
+              .then(function (response){
+                Restangular.setDefaultHeaders({Authorization: 'Token ' + response.data.token});
                 if (callbacks.createAccountCallback){
-                  return callbacks.createAccountCallback(data);
+                  return callbacks.createAccountCallback(response);
                 }
-              }, function (data){
+              }, function (response){
                 if (callbacks.createAccountCallback){
-                  return callbacks.createAccountCallback(data);
+                  return callbacks.createAccountCallback(response);
                 }
               });
           };

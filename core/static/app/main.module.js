@@ -11,7 +11,11 @@
       function ($routeProvider){
         $routeProvider.
           when('/', {
-            templateUrl: 'index.html',
+            templateUrl: 'login.html',
+            controller: 'AccountController'
+          }).
+          when('/signup', {
+            templateUrl: 'signup.html',
             controller: 'AccountController'
           }).
           when('/timings', {
