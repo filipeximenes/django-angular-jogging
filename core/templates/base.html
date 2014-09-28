@@ -4,9 +4,19 @@
   <head>
 
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap-theme.min.css' %}">
 
     <style type="text/css">
+      .vertical-align {
+          display: flex;
+          align-items: center;
+      }
+      .center {
+          text-align:center;
+      }
+
+      .center form {
+          display:inline-block;
+      }
       .ng-invalid {
         border-color: red;
       }
@@ -15,39 +25,89 @@
   </head>
   <body data-ng-app="Jogging">
 
-    <div data-ng-view></div>
+    <div data-ng-view class="container-fluid"></div>
 
     {% verbatim %}
     <script type="text/ng-template" id="login.html">
-      <h1>The Great Jog Timing App</h1>
-      <form>
-        <h1>Login</h1>
-        <span
-          data-ng-if="loginFailure">Invalid login data</span><br>
-        <label for="username">Username: </label>
-        <input
-          data-ng-model="loginData.username"
-          type="text" name="username">
-        <label for="password">Password: </label>
-        <input
-          data-ng-model="loginData.password"
-          type="password" name="password">
-        <button
-          data-ng-click="accountFactory.performLogin(loginData);">Login</button>
-      </form>
-      <a
-        data-ng-href="#/signup">Create account</a>
+      <div class="navbar nabar-default">
+        <a class="navbar-brand" data-ng-href="#/">Jogging App</a>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a
+                data-ng-href="#/signup">Create account</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+          <h1>Login</h1>
+          <span
+              data-ng-if="loginFailure">Invalid login data</span>
+          <form class="form-horizontal col-sm-6" role="form">
+            <div class="form-group">
+              <label for="username" class="col-sm-2 control-label">Username: </label>
+              <div class="col-sm-10">
+                <input
+                  data-ng-model="loginData.username"
+                  placeholder="Username"
+                  class="form-control"
+                  type="text" name="username">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">Password: </label>
+              <div class="col-sm-10">
+                <input
+                  data-ng-model="loginData.password"
+                  placeholder="Password"
+                  class="form-control"
+                  type="password" name="password">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button
+                  data-ng-click="accountFactory.performLogin(loginData);"
+                  class="btn btn-default"
+                  type="submit">Login</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      <div>
     </script>
 
     <script type="text/ng-template" id="signup.html">
-      <h1>The Great Jog Timing App</h1>
-      <form name="signupForm">
-        <h2>Create new account</h2>
-        <label for="username">Username: </label>
-        <input
-          data-ng-model="newAccount.username"
-          data-ng-class="{signupForm.username.$error: form-invalid}"
-          type="text" name="username">
+      <div class="navbar nabar-default">
+        <a class="navbar-brand" data-ng-href="#/">Jogging App</a>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a
+                data-ng-href="#/signup">Create account</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+          <h2>Create new account</h2>
+      <form class="form-horizontal col-sm-6" name="signupForm">
+
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">Username: </label>
+          <div class="col-sm-10">
+            <input
+              data-ng-model="newAccount.username"
+              data-ng-class="{signupForm.username.$error: form-invalid}"
+              placeholder="Username"
+              class="form-control"
+              type="text" name="username">
+          </div>
+        </div>
+
         <label for="email">Email: </label>
         <input
           data-ng-model="newAccount.email"
@@ -59,6 +119,8 @@
         <button
           data-ng-click="accountFactory.createAccount(newAccount);">Create</button>
       </form>
+        </div>
+      </div>
     </script>
 
     <script type="text/ng-template" id="timings.html">
