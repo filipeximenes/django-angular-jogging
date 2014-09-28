@@ -9,10 +9,13 @@ from rest_framework.authtoken.models import Token
 class BaseAPITestMixing(APITestCase):
 
     def setUp(self):
-        username = 'test'
-        password = 'testpassword'
+        self.username = 'test'
+        self.password = 'testpassword'
+
         self.user = User.objects.create_user(
-            username, 'test@test.com', password)
+            self.username, 'test@test.com')
+        self.user.set_password(self.password)
+        self.user.save()
 
         token = Token.objects.create(user=self.user)
         token.save()
