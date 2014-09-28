@@ -57,3 +57,11 @@ class AccountCreateEnpointTests(BaseAPITestMixing):
         response = self.view(request)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_returns_auth_token(self):
+        params = self.params
+
+        request = self.factory.post('', params)
+        response = self.view(request)
+
+        self.assertNotEqual(response.data['token'], '')
