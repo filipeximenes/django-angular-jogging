@@ -17,5 +17,5 @@ class AccountSerializer(serializers.ModelSerializer):
         return ''
 
     def get_auth_token(self, obj):
-        token, _ = Token.objects.get_or_create(user=obj)
+        token, _ = Token.objects.get(user=obj)
         return token
