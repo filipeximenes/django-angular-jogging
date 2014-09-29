@@ -4,6 +4,7 @@
                             'ngCookies',
                             'restangular',
 
+                            'Jogging.core',
                             'Jogging.accounts',
                             'Jogging.timings']);
 

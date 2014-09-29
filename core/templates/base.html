@@ -23,7 +23,7 @@
     </style>
 
   </head>
-  <body data-ng-app="Jogging">
+  <body data-ng-app="Jogging" data-ng-controller="CoreController">
 
     <div data-ng-view class="container-fluid"></div>
 
@@ -131,9 +131,14 @@
 
     <script type="text/ng-template" id="timings.html">
       <div class="navbar nabar-default">
-        <a class="navbar-brand" data-ng-href="#/">Jogging App</a>
+        <a class="navbar-brand" data-ng-href="#/timings">Jogging App</a>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+            <li>
+              <a
+                data-ng-click="coreFactory.logout();"
+                data-ng-href="#/">Logout</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -289,6 +294,9 @@
     <script type="text/javascript" src='{% static 'bootstrap/dist/js/bootstrap.min.js' %}'></script>
 
     <script type="text/javascript" src='{% static 'app/main.module.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/core/core.module.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/core/core.ctrl.js' %}'></script>
+    <script type="text/javascript" src='{% static 'app/core/core.service.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/accounts/accounts.module.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/accounts/accounts.ctrl.js' %}'></script>
     <script type="text/javascript" src='{% static 'app/accounts/accounts.service.js' %}'></script>
