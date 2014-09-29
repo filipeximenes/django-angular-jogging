@@ -130,104 +130,152 @@
     </script>
 
     <script type="text/ng-template" id="timings.html">
-      <form>
-        <label for="time">Time: </label>
-        <input
-          data-ng-model="createData.formatedTime"
-          data-ng-change="createData.time = conversionFactory.from_formated_to_seconds(createData.formatedTime)"
-          name="time" type="text">
-        <label for="distance">Distance: </label>
-        <input
-          data-ng-model="createData.distance"
-          name="distance" type="number" >
-        <label for="date">Date: </label>
-        <input
-          data-ng-model="createData.date"
-          name="date" type="date">
-        <button
-          data-ng-click="timingsFactory.createTiming(createData); createData = {};">add</button>
-      </form>
-      <form>
-        <label for="startDate">from</label>
-        <input
-          data-ng-model="filters.start_date"
-          type="date" name="startDate">
-        <label for="endDate">to</label>
-        <input
-          data-ng-model="filters.end_date"
-          type="date" name="endDate">
-        <button
-          data-ng-click="timingsFactory.getTimingList(filters);">filter</button>
-      </form>
-      <ul
-        data-ng-init="timingsFactory.getTimingList();">
-        <li
-          data-ng-repeat="timing in timingsFactory.timings">
-          <div
-            data-ng-init="status = {editing: false};"
-            data-ng-switch="status.editing;">
-            <div
-              data-ng-switch-when="false">
-              <button
-                data-ng-click="status.editing = !status.editing">edit</button>
-              {{conversionFactory.from_seconds_to_formated(timing.time)}} - {{timing.distance}} - {{timing.date}} - {{timing.distance/timing.time|number:2}} m/s
+      <div class="navbar nabar-default">
+        <a class="navbar-brand" data-ng-href="#/">Jogging App</a>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9 col-md-offset-2">
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="time">Time: </label>
+              <input
+                data-ng-model="createData.formatedTime"
+                data-ng-change="createData.time = conversionFactory.from_formated_to_seconds(createData.formatedTime)"
+                name="time" type="text"
+                class="form-control">
             </div>
-            <div
-              data-ng-switch-when="true">
-              <form>
-                <label for="time">Time: </label>
-                <input
-                  data-ng-model="updateData.formatedTime"
-                  data-ng-init="updateData.formatedTime = conversionFactory.from_seconds_to_formated(timing.time); updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)"
-                  data-ng-change="updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)"
-                  name="formatedTime" type="text">
-                <label for="distance">Distance: </label>
-                <input
-                  data-ng-model="updateData.distance"
-                  data-ng-init="updateData.distance = timing.distance;"
-                  name="distance" type="text">
-                <label for="date">Date: </label>
-                <input
-                  data-ng-model="updateData.date"
-                  data-ng-init="updateData.date = timing.date;"
-                  name="date" type="date">
-                <button
-                  data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;">save</button>
-                <button
-                  data-ng-click="status.editing = !status.editing;">cancel</button>
-                 ----
-                <button
-                  data-ng-click="timingsFactory.deleteTiming($index);">delete</button>
-              </form>
+            <div class="form-group">
+              <label for="distance">Distance: </label>
+              <input
+                data-ng-model="createData.distance"
+                name="distance" type="number"
+                class="form-control">
             </div>
-          </div>
-        </li>
-      </ul>
-
-      <table>
-        <tr>
-          <td>Week Number</td>
-          <td
-            data-ng-repeat="(week, timings) in reportsFactory.report">
-            {{week}}
-          </td>
-        </tr>
-        <tr>
-          <td>Total Distance (m)</td>
-          <td
-            data-ng-repeat="(week, timings) in reportsFactory.report">
-            {{reportsFactory.calculateTotalDistance(timings)}}
-          </td>
-        </tr>
-        <tr>
-          <td>Average Speed (m/s)</td>
-          <td
-            data-ng-repeat="(week, timings) in reportsFactory.report">
-            {{reportsFactory.calculateAverageSpeed(timings)|number:2}}
-          </td>
-        </tr>
-      </table>
-
+            <div class="form-group">
+              <label for="date">Date: </label>
+              <input
+                data-ng-model="createData.date"
+                name="date" type="date"
+                class="form-control">
+            </div>
+            <button
+              data-ng-click="timingsFactory.createTiming(createData); createData = {};"
+              class="btn btn-default">add</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9 col-md-offset-2">
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="startDate">From: </label>
+              <input
+                data-ng-model="filters.start_date"
+                type="date" name="startDate"
+                class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="endDate">To: </label>
+              <input
+                data-ng-model="filters.end_date"
+                type="date" name="endDate"
+                class="form-control">
+            </div>
+            <button
+              data-ng-click="timingsFactory.getTimingList(filters);"
+              class="btn btn-default">filter</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <ul
+            data-ng-init="timingsFactory.getTimingList();"
+            class="list-group">
+            <li
+              data-ng-repeat="timing in timingsFactory.timings"
+              class="list-group-item">
+              <div
+                data-ng-init="status = {editing: false};"
+                data-ng-switch="status.editing;">
+                <div
+                  data-ng-switch-when="false">
+                  <button
+                    data-ng-click="status.editing = !status.editing"
+                    class="btn btn-default">edit</button>
+                  {{conversionFactory.from_seconds_to_formated(timing.time)}} - {{timing.distance}} - {{timing.date}} - {{timing.distance/timing.time|number:2}} m/s
+                </div>
+                <div
+                  data-ng-switch-when="true">
+                  <form class="form-inline">
+                    <label for="time">Time: </label>
+                    <input
+                      data-ng-model="updateData.formatedTime"
+                      data-ng-init="updateData.formatedTime = conversionFactory.from_seconds_to_formated(timing.time); updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)"
+                      data-ng-change="updateData.time = conversionFactory.from_formated_to_seconds(updateData.formatedTime)"
+                      name="formatedTime" type="text"
+                      class="form-control">
+                    <label for="distance">Distance: </label>
+                    <input
+                      data-ng-model="updateData.distance"
+                      data-ng-init="updateData.distance = timing.distance;"
+                      name="distance" type="text"
+                      class="form-control">
+                    <label for="date">Date: </label>
+                    <input
+                      data-ng-model="updateData.date"
+                      data-ng-init="updateData.date = timing.date;"
+                      name="date" type="date"
+                      class="form-control">
+                    <div class="pull-right">
+                      <button
+                        data-ng-click="timingsFactory.updateTiming($index, updateData); status.editing = !status.editing;"
+                        class="btn btn-default">save</button>
+                      <button
+                        data-ng-click="status.editing = !status.editing;"
+                        class="btn btn-default">cancel</button>
+                      <button
+                        data-ng-click="timingsFactory.deleteTiming($index);"
+                        class="btn btn-default">delete</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6col-md-offset-3">
+          <table class="table table-striped col-md-">
+            <tr>
+              <td>Week Number</td>
+              <td
+                data-ng-repeat="(week, timings) in reportsFactory.report">
+                {{week}}
+              </td>
+            </tr>
+            <tr>
+              <td>Total Distance (m)</td>
+              <td
+                data-ng-repeat="(week, timings) in reportsFactory.report">
+                {{reportsFactory.calculateTotalDistance(timings)}}
+              </td>
+            </tr>
+            <tr>
+              <td>Average Speed (m/s)</td>
+              <td
+                data-ng-repeat="(week, timings) in reportsFactory.report">
+                {{reportsFactory.calculateAverageSpeed(timings)|number:2}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </script>
     {% endverbatim %}
 
