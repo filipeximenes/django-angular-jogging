@@ -4,34 +4,32 @@
   app.controller('AccountCreateController',
     ['$scope', '$location', 'AccountFactory',
       function ($scope, $location, AccountFactory){
-        var accountFactoryCallbacks = {};
-        accountFactoryCallbacks.createAccountCallback = function(response){
-          if (response.status === 201){
+        $scope.accountFactory = new AccountFactory({
+          onCreateAccountSuccess: function (response){
             $location.path('/timings');
-          }else if (response.status === 400){
-            angular.forEach(response.data, function(error, field){
-              $scope.signupForm[field].$setValidity('', false);
-            });
+          },
+          onCreateAccountFailure: function (response){
+            if (response.status === 400){
+              angular.forEach(response.data, function(error, field){
+                $scope.signupForm[field].$setValidity('', false);
+              });
+            }
           }
-        };
-
-        $scope.accountFactory = new AccountFactory(accountFactoryCallbacks);
+        });
       }
   ]);
 
   app.controller('LoginController',
     ['$scope', '$location', 'AccountFactory',
       function ($scope, $location, AccountFactory){
-        var accountFactoryCallbacks = {};
-        accountFactoryCallbacks.performLoginCallback = function(response){
-          if (response.status === 200){
+        $scope.accountFactory = new AccountFactory({
+          onPerformLoginSuccess: function (response){
             $location.path('/timings');
-          }else if (response.status === 400){
+          },
+          onPerformLoginFailure: function (response){
             $scope.loginFailure = true;
           }
-        };
-
-        $scope.accountFactory = new AccountFactory(accountFactoryCallbacks);
+        });
       }
   ]);
 })();
