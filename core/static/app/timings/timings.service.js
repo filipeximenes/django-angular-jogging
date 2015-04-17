@@ -2,8 +2,8 @@
   var app = angular.module('Jogging.timings.service', []);
 
   app.factory('TimingsFactory',
-    ['Restangular',
-      function (Restangular){
+    ['Restangular', 'ConversionFactory',
+      function (Restangular, ConversionFactory){
         var timingsResource = Restangular.all('timings');
 
         obj = {};
@@ -16,6 +16,8 @@
         };
 
         obj.createTiming = function (data){
+          data.time = ConversionFactory.fromFormattedToSeconds(createData.formattedTime);
+
           return timingsResource.post(data).then(function (response){
             obj.timings.push(response.data);
           });
