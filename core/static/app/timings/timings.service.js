@@ -10,7 +10,7 @@
         obj.timings = [];
 
         obj.getTimingList = function (filters){
-          return timingsResource.getList(filters).then(function(response) {
+          return timingsResource.getList(filters).then(function (response){
             obj.timings = response.data;
           });
         };
