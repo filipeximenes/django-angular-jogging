@@ -67,12 +67,12 @@
           return hours + ':' + minutes + ':' + seconds;
         };
 
-        obj.fromFormatedToSeconds = function (formated){
-          if (!formated){
+        obj.fromFormatedToSeconds = function (formatted){
+          if (!formatted){
             return 0;
           }
 
-          var splits = formated.split(':');
+          var splits = formatted.split(':');
 
           var seconds = parseInt(splits.pop(), 10) || 0;
           var minutes = parseInt(splits.pop(), 10) || 0;

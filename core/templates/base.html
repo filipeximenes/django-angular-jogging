@@ -148,8 +148,8 @@
             <div class="form-group">
               <label for="time">Time: </label>
               <input
-                data-ng-model="createData.formatedTime"
-                data-ng-change="createData.time = conversionFactory.fromFormatedToSeconds(createData.formatedTime)"
+                data-ng-model="createData.formattedTime"
+                data-ng-change="createData.time = conversionFactory.fromFormatedToSeconds(createData.formattedTime)"
                 name="time" type="text"
                 class="form-control">
             </div>
@@ -219,10 +219,10 @@
                   <form class="form-inline">
                     <label for="time">Time: </label>
                     <input
-                      data-ng-model="updateData.formatedTime"
-                      data-ng-init="updateData.formatedTime = conversionFactory.fromSecondsToFormated(timing.time); updateData.time = conversionFactory.fromFormatedToSeconds(updateData.formatedTime)"
-                      data-ng-change="updateData.time = conversionFactory.fromFormatedToSeconds(updateData.formatedTime)"
-                      name="formatedTime" type="text"
+                      data-ng-model="updateData.formattedTime"
+                      data-ng-init="updateData.formattedTime = conversionFactory.fromSecondsToFormated(timing.time); updateData.time = conversionFactory.fromFormatedToSeconds(updateData.formattedTime)"
+                      data-ng-change="updateData.time = conversionFactory.fromFormatedToSeconds(updateData.formattedTime)"
+                      name="formattedTime" type="text"
                       class="form-control">
                     <label for="distance">Distance: </label>
                     <input
