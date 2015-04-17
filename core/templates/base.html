@@ -149,7 +149,7 @@
               <label for="time">Time: </label>
               <input
                 data-ng-model="createData.formattedTime"
-                data-ng-change="createData.time = conversionFactory.fromFormatedToSeconds(createData.formattedTime)"
+                data-ng-change="createData.time = conversionFactory.fromFormattedToSeconds(createData.formattedTime)"
                 name="time" type="text"
                 class="form-control">
             </div>
@@ -212,7 +212,7 @@
                   <button
                     data-ng-click="status.editing = !status.editing"
                     class="btn btn-default">edit</button>
-                  {{conversionFactory.fromSecondsToFormated(timing.time)}} - {{timing.distance}} - {{timing.date}} - {{timing.distance/timing.time|number:2}} m/s
+                  {{conversionFactory.fromSecondsToFormatted(timing.time)}} - {{timing.distance}} - {{timing.date}} - {{timing.distance/timing.time|number:2}} m/s
                 </div>
                 <div
                   data-ng-switch-when="true">
@@ -220,8 +220,8 @@
                     <label for="time">Time: </label>
                     <input
                       data-ng-model="updateData.formattedTime"
-                      data-ng-init="updateData.formattedTime = conversionFactory.fromSecondsToFormated(timing.time); updateData.time = conversionFactory.fromFormatedToSeconds(updateData.formattedTime)"
-                      data-ng-change="updateData.time = conversionFactory.fromFormatedToSeconds(updateData.formattedTime)"
+                      data-ng-init="updateData.formattedTime = conversionFactory.fromSecondsToFormatted(timing.time); updateData.time = conversionFactory.fromFormattedToSeconds(updateData.formattedTime)"
+                      data-ng-change="updateData.time = conversionFactory.fromFormattedToSeconds(updateData.formattedTime)"
                       name="formattedTime" type="text"
                       class="form-control">
                     <label for="distance">Distance: </label>
