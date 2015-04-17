@@ -47,7 +47,7 @@
       function (){
         var obj = {};
 
-        obj.fromSecondsToFormated = function (total_secs){
+        obj.fromSecondsToFormatted = function (total_secs){
           var hours = '' + Math.floor(total_secs / 3600);
           var minutes = '' + Math.floor((total_secs % 3600) / 60);
           var seconds = '' + ((total_secs % 3600) % 60);
@@ -67,7 +67,7 @@
           return hours + ':' + minutes + ':' + seconds;
         };
 
-        obj.fromFormatedToSeconds = function (formatted){
+        obj.fromFormattedToSeconds = function (formatted){
           if (!formatted){
             return 0;
           }
